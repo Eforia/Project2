@@ -7,14 +7,14 @@
 #define ORDER_NUM 10
 
 // struct to store report data
-typedef struct report;
+typedef struct {
+} report;
 
 // struct to store product data
-typedef struct product;
+typedef struct {
+} product;
 
-void init_catalog(); // init of catalog
+void init_catalog();                      // init of catalog
 void order(int product_id, int write_fd); // func for product orders
 
-
-
-#endif  //end of header file
+#endif // end of header file
