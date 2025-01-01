@@ -14,6 +14,23 @@
 #define CUSTOMER_SIZE 5
 #define ORDER_NUM 10
 
+
+// struct to store report data
+typedef struct report {
+    int total_sales;
+    int failed_s;   // total failed pruchase attempts
+    float total;    // total sum of money generated
+} report;
+
+// struct to store product data
+typedef struct product {
+    char description[MAX_NAME]; // name of product
+    int item_count;  
+    float price;     
+    int req;    //total requests
+    int freq;   //failed requests
+} product;
+
 report final = {0, 0, 0};
 product catalog[TABLE_SIZE];
 
@@ -91,6 +108,7 @@ int main(int argc, char **argv) {
     }
   }
 
+
   // Parent process
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
@@ -125,4 +143,6 @@ int main(int argc, char **argv) {
          final.total);
 
   return 0;
+
 }
+

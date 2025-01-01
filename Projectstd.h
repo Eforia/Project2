@@ -7,20 +7,10 @@
 #define ORDER_NUM 10
 
 // struct to store report data
-typedef struct report {
-    int total_sales;
-    int failed_s;   // total failed pruchase attempts
-    float total;    // total sum of money generated
-} report;
+typedef struct report;
 
 // struct to store product data
-typedef struct product {
-    char description[MAX_NAME]; // name of product
-    int item_count;  
-    float price;     
-    int req;    //total requests
-    int freq;   //failed requests
-} product;
+typedef struct product;
 
 void init_catalog(); // init of catalog
 void order(int product_id, int write_fd); // func for product orders
