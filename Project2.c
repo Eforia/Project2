@@ -1,33 +1,18 @@
+#include "Projectstd.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <Projectstd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
 
 #define MAX_NAME 256
 #define TABLE_SIZE 20
 #define CUSTOMER_SIZE 5
 #define ORDER_NUM 10
-
-typedef struct report {
-  int total_sales;
-  int failed_s; // total failed requests
-  float total;
-} report;
-
-typedef struct product {
-  char description[MAX_NAME];
-  int item_count;
-  float price;
-  int req;  // times requested
-  int freq; // failed requests
-} product;
 
 report final = {0, 0, 0};
 product catalog[TABLE_SIZE];
