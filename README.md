@@ -10,8 +10,8 @@ This program is supossed to create a pseudo e-shop that is handled between a par
 HOW TO RUN PROGRAM /////////////////
 
 1) open terminal in the folder containing the Project2.c file
-2) type either "gcc -o name Project2.c" or "clang -o name Project2.c" depending on your prefered compiler (if using a compiler not mentioned look up how to use it)
-3) now run the program with "./name"
+2) run the make file by typing "make" (the make file uses clang compiler as default if you are using gcc or any other compiler go into the make file and change CC = clang to CC = gcc)
+3) now there should be an executable named Project2 now type "./Project2" in the terminal or double click the exe file and the program should run
 
 
 ////////////////////
