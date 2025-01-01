@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 
 #define MAX_NAME 256
 #define TABLE_SIZE 20
@@ -30,7 +31,7 @@ product catalog[TABLE_SIZE];
 
 
 void init_catalog(){ 
-    product temp_catalog[TABLE_SIZE] =   {
+    product catalog[TABLE_SIZE] =   {
         {"Milk", 2, 2.99, 0, 0},
         {"Eggs", 2, 4.50, 0, 0},
         {"Bread", 2, 1.99, 0, 0},
@@ -135,7 +136,7 @@ int main (int argc,char **argv)
         {
             int product_id;
             read(fd[i][0], &product_id, sizeof(product_id)); //read product id 
-            order(product_id, fd[i][1]);
+            order(product_id, fd[i]);
         }
     }
 
