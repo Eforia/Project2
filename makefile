@@ -13,7 +13,7 @@ SRC = Project2.c
 #Generates the .c file to an object .o file
 
 OBJ = $(SRC:.c=.o)
-sss
+
 #Names the exe file created
 
 EXEC = Project2

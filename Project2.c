@@ -14,6 +14,7 @@
 #define CUSTOMER_SIZE 5
 #define ORDER_NUM 10
 
+
 // struct to store report data
 typedef struct report {
     int total_sales;
@@ -107,6 +108,7 @@ int main(int argc, char **argv) {
     }
   }
 
+
   // Parent process
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
@@ -141,4 +143,6 @@ int main(int argc, char **argv) {
          final.total);
 
   return 0;
+
 }
+
