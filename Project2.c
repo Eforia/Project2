@@ -4,7 +4,9 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <Projectstd.h>
 #include <sys/wait.h>
+
 
 #define MAX_NAME 256
 #define TABLE_SIZE 20
