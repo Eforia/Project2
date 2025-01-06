@@ -6,14 +6,6 @@
 #define CUSTOMER_SIZE 5
 #define ORDER_NUM 10
 
-// struct to store report data
-typedef struct {
-} report;
-
-// struct to store product data
-typedef struct {
-} product;
-
 void init_catalog();                      // init of catalog
 void order(int product_id, int write_fd); // func for product orders
 
