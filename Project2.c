@@ -61,8 +61,8 @@ void order(int product_id, int write_fd) {
     catalog[product_id].item_count--;
     catalog[product_id].req++;
     final.total += catalog[product_id].price;
-    snprintf(answer, sizeof(answer), "Purchase succesful: %s\n",
-             catalog[product_id].description);
+    snprintf(answer, sizeof(answer), "Purchase succesful: %s , the total was: %f\n",
+             catalog[product_id].description, catalog[product_id].price);
   } else {
     catalog[product_id].req++;
     catalog[product_id].freq++;
