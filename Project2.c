@@ -75,11 +75,18 @@ void order(int product_id, int write_fd) {
 
 int main(int argc, char **argv) {
 
-  int fd[CUSTOMER_SIZE][2];
+  int fd[CUSTOMER_SIZE][2],fd2[CUSTOMER_SIZE][2]; // fd for child write and parent read, fd2 for the opposite
   pid_t ppid[CUSTOMER_SIZE];
 
   srand(getpid());
   init_catalog();
+
+  for (int i = 0; i < CUSTOMER_SIZE; i++) {
+    if (pipe(fd2[i]) == -1) {
+      printf("Error regarding pipe creation\n");
+      return 1;
+    }
+
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
     if (pipe(fd[i]) == -1) {
@@ -95,15 +102,20 @@ int main(int argc, char **argv) {
     if (ppid[i] == 0) {
       // Child process
 
-      close(fd[i][0]); // close read
+      close(fd2[i][1]); //close write of second pipe
+      close(fd[i][0]); // close read of first pipe
       for (int j = 0; j < ORDER_NUM; j++) {
+        char answer[MAX_NAME + 50];
         int product_id =
             rand() % TABLE_SIZE; // picks random number based on table size
         write(fd[i][1], &product_id,
               sizeof(product_id)); // writes product id to pipe
+        read(fd2[i][0], &answer,sizeof(answer));
+        printf("%s \n", answer);
         sleep(1);
       }
-      close(fd[i][1]); // close write
+      close(fd2[i][0]); //close read of second pipe
+      close(fd[i][1]); // close write of first pipe
       exit(0);         // close child
     }
   }
@@ -112,20 +124,21 @@ int main(int argc, char **argv) {
   // Parent process
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
-    close(fd[i][1]); // close write
+    close(fd[i][1]); // close write of first pipe
   }
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
     for (int j = 0; j < ORDER_NUM; j++) {
       int product_id;
       read(fd[i][0], &product_id, sizeof(product_id)); // read product id
-      order(product_id, fd[i][1]);
+      order(product_id, fd2[i][1]);
     }
   }
 
   for (int i = 0; i < CUSTOMER_SIZE; i++) {
     waitpid(ppid[i], NULL, 0); // wait for child process to be terminated
-    close(fd[i][0]);           // close read
+    close(fd[i][0]);           // close read of first pipe
+    close(fd2[i][1]);           // close write of second pipe
   }
 
   for (int i = 0; i < TABLE_SIZE; i++) {
